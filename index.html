@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#10151d">
+<title>CORE-STYLE Emergency Vehicle Console</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1017;--panel:#151d28;--panel2:#1c2735;--line:#344355;--muted:#9aabba;--text:#edf4fb;--cyan:#36c8e8;--amber:#ffbd45;--red:#ff4c58;--green:#54d69b;--shadow:0 12px 32px #0008}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#26374b 0,#0b1017 58%);color:var(--text);font:14px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:16px 22px;border-bottom:1px solid var(--line);background:#0b1119eF;position:sticky;top:0;z-index:5;backdrop-filter:blur(12px)}
+.brand{display:flex;align-items:center;gap:12px}.mark{width:42px;height:42px;border:2px solid var(--cyan);border-radius:10px;display:grid;place-items:center;color:var(--cyan);font-weight:900;letter-spacing:-2px;font-size:19px;box-shadow:0 0 18px #36c8e833}
+h1{font-size:17px;letter-spacing:.12em;margin:0}.sub{font-size:10px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase}
+.header-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.status{display:flex;align-items:center;gap:7px;color:var(--green);font-size:11px;text-transform:uppercase;letter-spacing:.1em}.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green)}
+button,select{font:inherit;color:inherit}button{cursor:pointer}.btn{border:1px solid var(--line);background:linear-gradient(#263344,#182230);border-radius:7px;padding:10px 12px;font-weight:750;letter-spacing:.04em;box-shadow:inset 0 1px #ffffff12,0 3px 8px #0004;transition:.12s}.btn:hover{border-color:#71869e;filter:brightness(1.13);transform:translateY(-1px)}.btn:active{transform:translateY(1px);box-shadow:inset 0 2px 8px #0008}.btn.active{border-color:var(--cyan);background:linear-gradient(#17617a,#124154);box-shadow:0 0 0 1px #36c8e833,inset 0 1px #ffffff22}.btn.red.active{border-color:var(--red);background:linear-gradient(#8d2630,#531b24)}.btn.amber.active{border-color:var(--amber);background:linear-gradient(#80551c,#4c3518)}.btn.green.active{border-color:var(--green);background:linear-gradient(#1e694e,#164332)}
+main{max-width:1500px;margin:auto;padding:18px;display:grid;grid-template-columns:minmax(320px, .88fr) minmax(460px,1.35fr);gap:16px}.panel{background:linear-gradient(145deg,#1a2431,#111923);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}.panel-head{padding:13px 15px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px;background:#ffffff05}.panel-head h2{margin:0;font-size:12px;letter-spacing:.15em;text-transform:uppercase}.eyebrow{font-size:10px;color:var(--muted);letter-spacing:.13em;text-transform:uppercase}.panel-body{padding:14px}.section{margin-bottom:16px}.section:last-child{margin-bottom:0}.section-title{display:flex;justify-content:space-between;align-items:center;color:#b7c6d5;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin:0 0 9px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}.grid .btn{min-height:48px;font-size:11px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;text-align:center;padding:7px 5px}.btn small{font-size:9px;font-weight:500;color:#b5c4d3;letter-spacing:.02em}.tone-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.tone-grid .btn{min-height:55px}.select-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.select-wrap label{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.1em;margin:0 0 5px}.select-wrap select{width:100%;background:#0e1620;border:1px solid var(--line);border-radius:7px;padding:10px}
+.vehicle-panel{grid-column:2;grid-row:1 / span 2}.vehicle-stage{padding:12px;background:linear-gradient(180deg,#111a25,#0c121a);position:relative}.vehicle-toolbar{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}.angle{color:var(--muted);font-size:11px;letter-spacing:.12em;text-transform:uppercase}.vehicle-wrap{min-height:310px;display:grid;place-items:center;overflow:hidden;border:1px solid #293747;border-radius:9px;background:radial-gradient(ellipse at center,#243345 0,#111a25 56%,#0b1119 100%);position:relative}.vehicle-wrap:before{content:"";position:absolute;inset:auto 8% 15%;height:1px;background:#53677b55;box-shadow:0 0 25px 8px #192b3d}.vehicle-svg{width:min(100%,780px);height:auto;max-height:365px;position:relative;z-index:1;filter:drop-shadow(0 18px 12px #0008)}.vehicle-svg .body{fill:#c9d2da;stroke:#eff6fb;stroke-width:2}.vehicle-svg .dark{fill:#273442;stroke:#8194a6;stroke-width:2}.vehicle-svg .glass{fill:#243f55;stroke:#8da6b9;stroke-width:2}.vehicle-svg .trim{fill:#111923;stroke:#596b7b;stroke-width:2}.vehicle-svg .lamp{fill:#dceeff;stroke:#fff;stroke-width:1}.vehicle-svg .tire{fill:#090d12;stroke:#66798a;stroke-width:4}.vehicle-svg .wheel{fill:#8998a5;stroke:#d9e3eb;stroke-width:2}.vehicle-svg .light{opacity:.12;transition:opacity .1s}.vehicle-svg .light.on{opacity:1;filter:drop-shadow(0 0 8px currentColor)}.vehicle-svg .red-light{fill:#ff263c;color:#ff263c}.vehicle-svg .blue-light{fill:#168dff;color:#168dff}.vehicle-svg .white-light{fill:#eaf8ff;color:#eaf8ff}.vehicle-svg .amber-light{fill:#ffb326;color:#ffb326}
+.vehicle-meta{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:9px;color:var(--muted);font-size:10px}.vehicle-note{padding:10px 13px;color:#aebdcb;font-size:11px;border-top:1px solid var(--line)}
+.advisor{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}.advisor-arrows{display:flex;gap:5px}.advisor-arrows .btn{min-width:42px;padding:10px 6px}.advisor-state{color:var(--muted);font-size:10px}
+.bottom-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.control-row{display:flex;gap:7px;flex-wrap:wrap}.control-row .btn{flex:1;min-width:80px}
+.footer{max-width:1500px;margin:0 auto;padding:0 18px 22px;color:#8193a5;font-size:10px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+#toast{position:fixed;bottom:18px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#e8f5ff;color:#101923;padding:10px 15px;border-radius:8px;font-weight:750;box-shadow:var(--shadow);transition:.2s;z-index:10}#toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:980px){main{grid-template-columns:1fr}.vehicle-panel{grid-column:1;grid-row:auto}.vehicle-wrap{min-height:260px}}
+@media(max-width:520px){header{padding:12px}.sub{display:none}main{padding:10px;gap:10px}.panel-body{padding:11px}.grid{gap:5px}.grid .btn{font-size:10px}.vehicle-wrap{min-height:205px}.vehicle-svg{max-height:245px}.header-right .status{display:none}}
+</style>
+</head>
+<body>
+<header>
+ <div class="brand"><div class="mark">VX</div><div><h1>VEHICLE CONTROL INTERFACE</h1><div class="sub">Emergency lighting & siren simulator · prototype 01</div></div></div>
+ <div class="header-right"><div class="status"><span class="dot"></span> SYSTEM READY</div><button class="btn red" id="masterOff">MASTER OFF</button></div>
+</header>
+<main>
+ <section class="panel">
+  <div class="panel-head"><h2>01 / Siren control</h2><span class="eyebrow">Audio module</span></div>
+  <div class="panel-body">
+   <div class="section">
+    <div class="section-title"><span>Siren selector</span><span id="toneStatus">STANDBY</span></div>
+    <div class="grid tone-grid" id="toneButtons">
+     <button class="btn" data-tone="Wail">WAIL<small>Winding sweep</small></button>
+     <button class="btn" data-tone="Yelp">YELP<small>Rapid sweep</small></button>
+     <button class="btn" data-tone="Priority">PRIORITY<small>Fast cycle</small></button>
+     <button class="btn" data-tone="Dozer">DOZER<small>Low pulse</small></button>
+     <button class="btn" data-tone="Ultimate Hi-Lo">ULTIMATE HI-LO<small>Alternating pitch</small></button>
+     <button class="btn" data-tone="Manual">MANUAL<small>Hold to sound</small></button>
+    </div>
+   </div>
+   <div class="section">
+    <div class="section-title"><span>Air horn selections</span><span class="eyebrow">Press to play</span></div>
+    <div class="grid four" id="hornButtons">
+     <button class="btn amber" data-horn="Standard">AIR HORN<small>Standard</small></button>
+     <button class="btn amber" data-horn="Dual">DUAL TONE<small>Two-note</small></button>
+     <button class="btn amber" data-horn="Blast">BLAST<small>Short burst</small></button>
+     <button class="btn amber" data-horn="Hi-Lo">HI-LO HORN<small>Alternating</small></button>
+    </div>
+   </div>
+   <div class="section">
+    <div class="section-title"><span>Siren functions</span></div>
+    <div class="grid two">
+     <button class="btn" id="sirenWail">SIREN ENABLE<small>Toggle siren output</small></button>
+     <button class="btn" id="manualBtn">MANUAL / MOMENTARY<small>Hold to sound</small></button>
+    </div>
+   </div>
+   <div class="section">
+    <div class="section-title"><span>Audio settings</span></div>
+    <div class="select-row">
+     <div class="select-wrap"><label for="profile">Siren profile</label><select id="profile"><option value="classic">Classic electronic</option><option value="deep">Deep / heavy</option><option value="bright">Bright / sharp</option></select></div>
+     <div class="select-wrap"><label for="volume">Output level</label><select id="volume"><option value=".18">Low</option><option value=".32" selected>Medium</option><option value=".48">High</option><option value=".65">Maximum</option></select></div>
+    </div>
+    <p class="eyebrow">Audio is synthesized in your browser. Tap any tone once to enable audio.</p>
+   </div>
+  </div>
+ </section>
+
+ <section class="panel vehicle-panel">
+  <div class="panel-head"><h2>02 / Display vehicle</h2><span class="eyebrow">Lighting visualization</span></div>
+  <div class="vehicle-stage">
+   <div class="vehicle-toolbar"><div class="angle" id="angleLabel">FRONT VIEW · 0°</div><div class="control-row"><button class="btn" id="prevView" aria-label="Previous vehicle view">◀</button><button class="btn" id="nextView" aria-label="Next vehicle view">▶</button></div></div>
+   <div class="vehicle-wrap">
+    <svg class="vehicle-svg" viewBox="0 0 760 350" role="img" aria-label="Illustrated emergency SUV with lightbar, grille lights, and plate lights">
+     <defs><linearGradient id="paint" x2="0" y2="1"><stop stop-color="#f3f6f8"/><stop offset="1" stop-color="#8f9eaa"/></linearGradient><linearGradient id="glass" x2="0" y2="1"><stop stop-color="#42647d"/><stop offset="1" stop-color="#172d40"/></linearGradient></defs>
+     <g id="frontView">
+      <path class="body" fill="url(#paint)" d="M220 95 Q238 65 280 59 L480 59 Q522 65 540 95 L585 145 L585 274 Q580 292 556 294 L204 294 Q180 292 175 274 L175 145Z"/>
+      <path class="glass" fill="url(#glass)" d="M267 78 Q280 68 310 68 L450 68 Q480 68 493 78 L530 132 L230 132Z"/>
+      <path class="dark" d="M222 140 H538 L555 176 H205Z"/><path class="trim" d="M205 177 H555 V239 H205Z"/>
+      <path class="dark" d="M314 181 H446 V234 H314Z"/><path stroke="#91a3b1" stroke-width="3" d="M328 188V228 M350 188V228 M372 188V228 M394 188V228 M416 188V228 M438 188V228"/>
+      <path class="lamp" d="M209 151 L284 151 L273 173 H204Z"/><path class="lamp" d="M476 151 H551 L556 173 H487Z"/>
+      <rect class="dark" x="340" y="246" width="80" height="23" rx="3"/><rect fill="#dfe8ed" x="347" y="250" width="66" height="15" rx="1"/><text x="380" y="261" fill="#17212b" font-size="8" text-anchor="middle" font-weight="bold">VX-01</text>
+      <path class="dark" d="M190 275 H570 L550 296 H210Z"/>
+      <rect class="tire" x="194" y="260" width="55" height="83" rx="20"/><rect class="tire" x="511" y="260" width="55" height="83" rx="20"/>
+      <g class="light red-light" id="frontBarRed"><rect x="300" y="48" width="76" height="13" rx="3"/></g><g class="light blue-light" id="frontBarBlue"><rect x="384" y="48" width="76" height="13" rx="3"/></g>
+      <g class="light red-light" id="frontGrilleRed"><rect x="287" y="193" width="21" height="15" rx="3"/><rect x="452" y="193" width="21" height="15" rx="3"/></g><g class="light blue-light" id="frontGrilleBlue"><rect x="287" y="216" width="21" height="13" rx="3"/><rect x="452" y="216" width="21" height="13" rx="3"/></g>
+      <g class="light white-light" id="frontPlate"><rect x="358" y="270" width="44" height="5" rx="2"/></g>
+      <g class="light amber-light" id="frontAdvisor"><rect x="303" y="37" width="154" height="8" rx="3"/></g>
+     </g>
+     <g id="sideView" style="display:none">
+      <path class="body" fill="url(#paint)" d="M100 222 L130 168 Q150 145 222 137 L286 83 Q308 67 365 67 H486 Q522 68 550 110 L601 151 L665 172 Q688 184 690 218 L683 260 H93Z"/>
+      <path class="glass" fill="url(#glass)" d="M300 87 Q318 76 365 76 H421 V137 H245Z"/><path class="glass" fill="url(#glass)" d="M433 76 H482 Q509 77 529 111 L548 137 H433Z"/>
+      <path stroke="#64798a" stroke-width="3" d="M426 78V140 M232 142H557"/>
+      <path class="dark" d="M100 194 H683 V241 H100Z"/><path class="trim" d="M95 239 H686 L675 265 H105Z"/>
+      <path class="dark" d="M118 176 L180 166 L202 185 L193 206 H111Z"/><path class="lamp" d="M111 181 L175 171 L185 184 L115 194Z"/>
+      <path class="dark" d="M606 166 L663 180 L678 200 L610 198Z"/><path class="lamp" d="M615 170 L659 182 L670 193 L617 188Z"/>
+      <circle class="tire" cx="232" cy="251" r="49"/><circle class="wheel" cx="232" cy="251" r="25"/><circle class="tire" cx="560" cy="251" r="49"/><circle class="wheel" cx="560" cy="251" r="25"/>
+      <path class="dark" d="M130 208 H640 V222 H130Z"/><rect class="dark" x="334" y="153" width="145" height="34" rx="4"/><text x="406" y="175" fill="#dfe8ef" font-size="15" text-anchor="middle" font-weight="bold" letter-spacing="3">RESPONSE</text>
+      <g class="light red-light" id="sideBarRed"><rect x="328" y="56" width="62" height="13" rx="3"/></g><g class="light blue-light" id="sideBarBlue"><rect x="395" y="56" width="62" height="13" rx="3"/></g>
+      <g class="light red-light" id="sideGrilleRed"><rect x="192" y="197" width="25" height="11" rx="3"/></g><g class="light blue-light" id="sideGrilleBlue"><rect x="220" y="197" width="25" height="11" rx="3"/></g>
+      <g class="light white-light" id="sidePlate"><rect x="625" y="226" width="30" height="5" rx="2"/></g><g class="light amber-light" id="sideAdvisor"><rect x="328" y="45" width="129" height="7" rx="3"/></g>
+     </g>
+     <g id="rearView" style="display:none">
+      <path class="body" fill="url(#paint)" d="M220 95 Q238 65 280 59 H480 Q522 65 540 95 L585 145 V274 Q580 292 556 294 H204 Q180 292 175 274 V145Z"/>
+      <path class="glass" fill="url(#glass)" d="M235 132 L267 78 Q280 68 310 68 H450 Q480 68 493 78 L525 132Z"/>
+      <path class="dark" d="M205 145 H555 V241 H205Z"/><path class="trim" d="M205 241 H555 V274 H205Z"/>
+      <rect class="dark" x="215" y="154" width="75" height="64" rx="9"/><rect class="dark" x="470" y="154" width="75" height="64" rx="9"/>
+      <path fill="#ff3345" stroke="#ffc3c8" stroke-width="2" d="M222 164 H282 V207 H222Z"/><path fill="#ff3345" stroke="#ffc3c8" stroke-width="2" d="M478 164 H538 V207 H478Z"/>
+      <rect class="dark" x="340" y="250" width="80" height="23" rx="3"/><rect fill="#dfe8ed" x="347" y="254" width="66" height="15" rx="1"/><text x="380" y="265" fill="#17212b" font-size="8" text-anchor="middle" font-weight="bold">VX-01</text>
+      <rect class="tire" x="194" y="260" width="55" height="83" rx="20"/><rect class="tire" x="511" y="260" width="55" height="83" rx="20"/>
+      <g class="light red-light" id="rearBarRed"><rect x="300" y="48" width="76" height="13" rx="3"/></g><g class="light blue-light" id="rearBarBlue"><rect x="384" y="48" width="76" height="13" rx="3"/></g>
+      <g class="light red-light" id="rearGrilleRed"><rect x="298" y="224" width="58" height="12" rx="3"/></g><g class="light blue-light" id="rearGrilleBlue"><rect x="404" y="224" width="58" height="12" rx="3"/></g>
+      <g class="light white-light" id="rearPlate"><rect x="358" y="278" width="44" height="5" rx="2"/></g><g class="light amber-light" id="rearAdvisor"><rect x="303" y="37" width="154" height="8" rx="3"/></g>
+     </g>
+    </svg>
+   </div>
+   <div class="vehicle-meta"><span>DISPLAY UNIT: VX-01 · SUV</span><span id="lightSummary">ALL LIGHTS OFF</span></div>
+  </div>
+  <div class="vehicle-toolbar" style="padding:10px 13px;margin:0"><span class="eyebrow">Vehicle rotation</span><div class="control-row"><button class="btn" id="frontViewBtn">FRONT</button><button class="btn" id="sideViewBtn">SIDE</button><button class="btn" id="rearViewBtn">REAR</button></div></div>
+  <div class="vehicle-note">Illustrative simulator display. Light elements illuminate on the vehicle as their controls are activated.</div>
+ </section>
+
+ <section class="panel">
+  <div class="panel-head"><h2>03 / Emergency lighting</h2><span class="eyebrow">Output controls</span></div>
+  <div class="panel-body">
+   <div class="section">
+    <div class="section-title"><span>Lightbar selectors</span><span id="barStatus">OFF</span></div>
+    <div class="grid three" id="barButtons">
+     <button class="btn red" data-light="barRed">RED<small>Lightbar channel</small></button><button class="btn" data-light="barBlue">BLUE<small>Lightbar channel</small></button><button class="btn" data-light="barWhite">WHITE<small>Take-down / alley</small></button>
+     <button class="btn amber" data-light="barAmber">AMBER<small>Warning channel</small></button><button class="btn" data-light="barCruise">CRUISE<small>Low intensity</small></button><button class="btn" data-light="barAll">ALL BAR<small>Full lightbar</small></button>
+    </div>
+   </div>
+   <div class="section">
+    <div class="section-title"><span>Traffic advisor</span><span id="advisorStatus">OFF</span></div>
+    <div class="advisor"><div class="grid three" id="advisorButtons"><button class="btn amber" data-advisor="left">◀ LEFT<small>Direct traffic left</small></button><button class="btn amber" data-advisor="center">CENTER<small>Warning pattern</small></button><button class="btn amber" data-advisor="right">RIGHT ▶<small>Direct traffic right</small></button></div><div class="advisor-arrows"><button class="btn" data-advisor="left" aria-label="Advisor left">◀</button><button class="btn" data-advisor="right" aria-label="Advisor right">▶</button></div></div>
+   </div>
+   <div class="section">
+    <div class="section-title"><span>Grille & front lighting</span></div>
+    <div class="grid four" id="grilleButtons"><button class="btn red" data-light="grilleRed">GRILLE RED</button><button class="btn" data-light="grilleBlue">GRILLE BLUE</button><button class="btn" data-light="headlights">HEADLIGHTS</button><button class="btn" data-light="wigwags">WIG-WAGS</button></div>
+   </div>
+   <div class="section">
+    <div class="section-title"><span>Rear / auxiliary lighting</span></div>
+    <div class="grid four" id="auxButtons"><button class="btn" data-light="rearRed">REAR RED</button><button class="btn" data-light="rearBlue">REAR BLUE</button><button class="btn" data-light="plate">PLATE LIGHTS</button><button class="btn amber" data-light="scene">SCENE LIGHTS</button></div>
+   </div>
+   <div class="section">
+    <div class="section-title"><span>Lighting presets</span></div>
+    <div class="grid three" id="presetButtons"><button class="btn" data-preset="response">RESPONSE<small>Red / blue pattern</small></button><button class="btn" data-preset="warning">WARNING<small>Amber advisor</small></button><button class="btn" data-preset="scene">SCENE<small>White work lights</small></button></div>
+   </div>
+   <div class="section">
+    <div class="section-title"><span>System</span></div>
+    <div class="control-row"><button class="btn green" id="lightsOn">LIGHTS ON</button><button class="btn red" id="lightsOff">LIGHTS OFF</button></div>
+   </div>
+  </div>
+ </section>
+</main>
+<div class="footer"><span>VX CONTROL · LOCAL BROWSER SIMULATOR</span><span>For visual/audio demonstration only — not connected to real emergency equipment.</span></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script>
+(() => {
+ const $=(s)=>document.querySelector(s), $$=(s)=>[...document.querySelectorAll(s)];
+ const state={tone:null, sirenEnabled:false, advisor:null, view:0, lights:new Set(), audio:null,osc:[],gain:null,interval:null,step:0};
+ const viewNames=['FRONT VIEW · 0°','SIDE VIEW · 90°','REAR VIEW · 180°'];
+ const lightEls={
+  barRed:['frontBarRed','sideBarRed','rearBarRed'],barBlue:['frontBarBlue','sideBarBlue','rearBarBlue'],
+  barWhite:['frontBarRed','frontBarBlue','sideBarRed','sideBarBlue','rearBarRed','rearBarBlue'],
+  barAmber:['frontAdvisor','sideAdvisor','rearAdvisor'],barCruise:['frontBarRed','sideBarBlue','rearBarRed'],
+  barAll:['frontBarRed','frontBarBlue','sideBarRed','sideBarBlue','rearBarRed','rearBarBlue'],
+  grilleRed:['frontGrilleRed','sideGrilleRed','rearGrilleRed'],grilleBlue:['frontGrilleBlue','sideGrilleBlue','rearGrilleBlue'],
+  headlights:['frontPlate'],wigwags:['frontGrilleRed','frontGrilleBlue'],rearRed:['rearGrilleRed'],rearBlue:['rearGrilleBlue'],
+  plate:['frontPlate','sidePlate','rearPlate'],scene:['frontPlate','sidePlate','rearPlate']
+ };
+ function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.remove('show'),1700)}
+ function audioInit(){if(!state.audio){const C=window.AudioContext||window.webkitAudioContext;if(!C){toast('Web Audio is not supported in this browser');return false}state.audio=new C();state.gain=state.audio.createGain();state.gain.gain.value=Number($('#volume').value);state.gain.connect(state.audio.destination)}if(state.audio.state==='suspended')state.audio.resume();return true}
+ function stopAudio(){if(state.interval){clearInterval(state.interval);state.interval=null}state.osc.forEach(o=>{try{o.stop()}catch(e){}});state.osc=[];if(state.gain)state.gain.gain.setTargetAtTime(0,state.audio.currentTime,.025);state.tone=null;$$('[data-tone]').forEach(b=>b.classList.remove('active'));$('#toneStatus').textContent='STANDBY'}
+ function sound(freq,duration=.2,type='square',when=0){if(!audioInit())return;const ctx=state.audio,osc=ctx.createOscillator(),g=ctx.createGain();osc.type=type;osc.frequency.setValueAtTime(freq,ctx.currentTime+when);g.gain.setValueAtTime(.0001,ctx.currentTime+when);g.gain.exponentialRampToValueAtTime(Number($('#volume').value),ctx.currentTime+when+.015);g.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+when+duration);osc.connect(g);g.connect(ctx.destination);osc.start(ctx.currentTime+when);osc.stop(ctx.currentTime+when+duration+.03)}
+ function setTone(name){if(state.tone===name){stopAudio();return}stopAudio();if(!audioInit())return;state.tone=name;$('#toneStatus').textContent=name.toUpperCase();$$('[data-tone]').forEach(b=>b.classList.toggle('active',b.dataset.tone===name));const profile=$('#profile').value;const mult=profile==='deep'?.78:profile==='bright'?1.18:1;
+  if(name==='Manual'){sound(470*mult,1.5,'sawtooth');return}
+  let count=0;const play=()=>{if(!state.tone)return;const t=count++%8;let f=600,d=.32;
+   if(name==='Wail')f=420+Math.sin(t/7*Math.PI*2)*260;
+   if(name==='Yelp'){f=t%2?880:560;d=.14}
+   if(name==='Priority'){f=[500,900,700,1100][t%4];d=.12}
+   if(name==='Dozer'){f=t%2?180:260;d=.3}
+   if(name==='Ultimate Hi-Lo'){f=t%2?760:520;d=.38}
+   sound(Math.max(100,f*mult),d,'sawtooth');
+  };play();state.interval=setInterval(play,name==='Wail'?260:name==='Yelp'?155:name==='Priority'?140:name==='Dozer'?330:390);
+ }
+ function horn(type){stopAudio();if(!audioInit())return;const p=$('#profile').value,m=p==='deep'?.8:p==='bright'?1.15:1;const patterns={Standard:[[420,.42],[510,.42]],Dual:[[420,.55],[530,.55]],Blast:[[380,.22]],'Hi-Lo':[[600,.3],[420,.3],[600,.3],[420,.3]]};let at=0;(patterns[type]||patterns.Standard).forEach(([f,d])=>{sound(f*m,d,'sawtooth',at);at+=d+.06});toast(type+' air horn')}
+ function renderLights(){const on=[...state.lights];Object.values(lightEls).flat().forEach(id=>$('#'+id)?.classList.remove('on'));
+  on.forEach(key=>(lightEls[key]||[]).forEach(id=>$('#'+id)?.classList.add('on')));
+  // Color-specific display behavior, with all selected channels visible.
+  if(state.lights.has('barRed'))['frontBarRed','sideBarRed','rearBarRed'].forEach(id=>$('#'+id)?.classList.add('on'));
+  if(state.lights.has('barBlue'))['frontBarBlue','sideBarBlue','rearBarBlue'].forEach(id=>$('#'+id)?.classList.add('on'));
+  if(state.lights.has('grilleRed'))['frontGrilleRed','sideGrilleRed','rearGrilleRed'].forEach(id=>$('#'+id)?.classList.add('on'));
+  if(state.lights.has('grilleBlue'))['frontGrilleBlue','sideGrilleBlue','rearGrilleBlue'].forEach(id=>$('#'+id)?.classList.add('on'));
+  if(state.lights.has('rearRed'))$('#rearGrilleRed')?.classList.add('on');if(state.lights.has('rearBlue'))$('#rearGrilleBlue')?.classList.add('on');
+  if(state.lights.has('plate'))['frontPlate','sidePlate','rearPlate'].forEach(id=>$('#'+id)?.classList.add('on'));
+  if(state.lights.has('barAmber'))['frontAdvisor','sideAdvisor','rearAdvisor'].forEach(id=>$('#'+id)?.classList.add('on'));
+  if(state.advisor){['frontAdvisor','sideAdvisor','rearAdvisor'].forEach(id=>$('#'+id)?.classList.add('on'))}
+  $$('[data-light]').forEach(b=>b.classList.toggle('active',state.lights.has(b.dataset.light)));
+  $('#lightSummary').textContent=on.length||state.advisor?'ACTIVE: '+on.length+' CHANNEL(S)'+(state.advisor?' · ADVISOR '+state.advisor.toUpperCase():''):'ALL LIGHTS OFF';
+  $('#barStatus').textContent=['barRed','barBlue','barWhite','barAmber','barCruise','barAll'].some(x=>state.lights.has(x))?'ACTIVE':'OFF';
+  $('#advisorStatus').textContent=state.advisor?state.advisor.toUpperCase():'OFF';
+  $$('[data-advisor]').forEach(b=>b.classList.toggle('active',b.dataset.advisor===state.advisor));
+ }
+ function setView(i){state.view=(i+3)%3;['frontView','sideView','rearView'].forEach((id,n)=>$('#'+id).style.display=n===state.view?'':'none');$('#angleLabel').textContent=viewNames[state.view]}
+ function allLightsOff(){state.lights.clear();state.advisor=null;renderLights();toast('All lighting outputs off')}
+ function preset(name){allLightsOff();if(name==='response'){['barRed','barBlue','grilleRed','grilleBlue','rearRed','rearBlue'].forEach(x=>state.lights.add(x))}
+  if(name==='warning'){state.lights.add('barAmber');state.advisor='center'}
+  if(name==='scene'){state.lights.add('scene');state.lights.add('plate')}
+  renderLights();toast(name.toUpperCase()+' preset active')}
+ $$('[data-tone]').forEach(b=>b.addEventListener('click',()=>setTone(b.dataset.tone)));
+ $$('[data-horn]').forEach(b=>b.addEventListener('click',()=>horn(b.dataset.horn)));
+ $$('[data-light]').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.light;state.lights.has(k)?state.lights.delete(k):state.lights.add(k);renderLights()}));
+ $$('[data-advisor]').forEach(b=>b.addEventListener('click',()=>{state.advisor=state.advisor===b.dataset.advisor?null:b.dataset.advisor;renderLights()}));
+ $$('[data-preset]').forEach(b=>b.addEventListener('click',()=>preset(b.dataset.preset)));
+ $('#prevView').onclick=()=>setView(state.view-1);$('#nextView').onclick=()=>setView(state.view+1);
+ $('#frontViewBtn').onclick=()=>setView(0);$('#sideViewBtn').onclick=()=>setView(1);$('#rearViewBtn').onclick=()=>setView(2);
+ $('#lightsOff').onclick=allLightsOff;$('#lightsOn').onclick=()=>{['barRed','barBlue','grilleRed','grilleBlue','rearRed','rearBlue','plate'].forEach(x=>state.lights.add(x));renderLights();toast('Lighting outputs enabled')};
+ $('#masterOff').onclick=()=>{stopAudio();state.sirenEnabled=false;$('#sirenWail').classList.remove('active');allLightsOff();toast('MASTER OFF · ALL OUTPUTS DISABLED')};
+ $('#sirenWail').onclick=()=>{state.sirenEnabled=!state.sirenEnabled;$('#sirenWail').classList.toggle('active',state.sirenEnabled);if(state.sirenEnabled)setTone('Wail');else stopAudio()};
+ const manual=$('#manualBtn');manual.addEventListener('pointerdown',e=>{e.preventDefault();manual.classList.add('active');if(audioInit())sound(470,1.1,'sawtooth')});['pointerup','pointerleave','pointercancel'].forEach(ev=>manual.addEventListener(ev,()=>manual.classList.remove('active')));
+ $('#volume').onchange=()=>{if(state.gain)state.gain.gain.setTargetAtTime(Number($('#volume').value),state.audio.currentTime,.05)};
+ document.addEventListener('keydown',e=>{if(e.target.matches('input,select,textarea'))return;if(e.key==='ArrowLeft')setView(state.view-1);if(e.key==='ArrowRight')setView(state.view+1);if(e.key==='Escape')$('#masterOff').click()});
+ renderLights();
+})();
+</script>
+</body>
+</html>
